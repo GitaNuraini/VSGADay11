@@ -27,7 +27,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_MOVIE_TABLE = "CREATE TABLE" + TABLE_SQLite + "(" +
-                COLUMN_ID + "INTEGER, " +
+                COLUMN_ID + "INTEGER PRIMARY KEY autoincreament, " +
                 COLUMN_NAME + "TEXT NOT NULL," +
                 COLUMN_ADDRESS + "TEXT NOT NULL" +
                 ")";
@@ -80,6 +80,14 @@ public class DbHelper extends SQLiteOpenHelper {
         Log.e("update sqlite", updateQuery);
         database.execSQL(updateQuery);
         database.close();
+    }
+    public void delete (int id) {
+        SQLiteDatabase database = this.getWritableDatabase();
 
+        String updateQuery = "DELETE FROM" + TABLE_SQLite + "WHERE"
+                + COLUMN_ID + "=" + "'" + id + "'";
+        Log.e("update sqlite", updateQuery);
+        database.execSQL(updateQuery);
+        database.close();
     }
 }
